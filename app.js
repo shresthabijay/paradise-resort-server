@@ -10,7 +10,7 @@ app.use(cors())
 app.use(bodyparser.urlencoded({ extended: false }))
 app.use(bodyparser.json())
 
-app.use("/",mainRouteHandler)
+app.use(mainRouteHandler)
 
 module.exports=app
 

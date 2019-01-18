@@ -1,5 +1,5 @@
 const http=require("http")
-db=require("./database")
+db=require("./database.js")
 const app=require("./app")
 const BookingsEventsNotify=require("./bookingEventsNotify")
 
@@ -13,4 +13,3 @@ BookingsEventsNotify(10,40)//checking bookings and events and sending notifcatio
 server.listen(port,(err)=>{
     console.log("server started at: ",port)
 })
-

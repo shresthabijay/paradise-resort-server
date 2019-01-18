@@ -1,11 +1,7 @@
 var mysql = require('mysql');
+const config=require("./server.config")
 
-var db= mysql.createConnection({
-  host: "vj.shresthabibek.xyz",
-  user: "vj",
-  password: "P@ssword@123!!3ljasdflkLJ@#",
-  database:"paradise"
-});
+var db= mysql.createConnection(config.database);
 
 db.connect(function(err) {
   if (err) {};
