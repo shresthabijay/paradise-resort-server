@@ -5,6 +5,11 @@ const checkBookings=(minBeforeNotification)=>{
     let query=`SELECT * FROM booking`
 
     db.query(query,(err,results)=>{
+        if(err){
+            console.log("database is not responding!")
+            return
+        }
+
         if(results.length===0) return;
 
         for (var i = 0, len = results.length; i < len; i++) {
