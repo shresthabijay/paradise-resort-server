@@ -1,5 +1,6 @@
 const express=require("express")
 const route=express.Router()
+const authTokenVerify=require("../middleware/authTokenVerify")
 
 
 route.get("/get/all",(req,res)=>{
@@ -16,7 +17,7 @@ route.get("/get/all",(req,res)=>{
     })
 })
 
-route.post("/add",(req,res)=>{
+route.post("/add",authTokenVerify,(req,res)=>{
 
     let {name,description,date_time,image_url}=req.body
 

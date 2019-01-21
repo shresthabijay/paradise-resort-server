@@ -2,6 +2,7 @@ const express=require("express")
 const route=express.Router()
 const moment=require("moment")
 const khalti_token_verifier=require("../khaltiVerification")
+const authTokenVerify=require("../middleware/authTokenVerify")
 
 
 route.get("/get/all",(req,res)=>{
@@ -18,7 +19,36 @@ route.get("/get/all",(req,res)=>{
     })
 })
 
-route.post("/add",(req,res)=>{
+route.post("/is-room-available",(req,res)=>{
+
+    let {room_type_id}=req.body
+
+    let room_find_query=`SELECT r.room_no ,r.status ,r.room_type_id,rt.id,rt.name as room_type_name,rt.price_per_night as price FROM room_types as rt
+               INNER JOIN rooms as r ON r.room_type_id=rt.id
+               WHERE rt.id=? AND r.status="available"
+               `
+
+    db.query(room_find_query,[room_type_id],(err,results)=>{
+        if(err){
+                res.status(400).send({message:"cannot find room"})
+                return
+        }
+        else{
+            if(results.length===0){
+                res.status(400).send({message:"cannot find room"})
+                return
+            }
+            else{
+                res.status(200).send({message:"room available"})
+            }
+        }
+    }
+    
+    )
+}
+)
+
+route.post("/add",authTokenVerify,(req,res)=>{
 
     let {name,phone_no,email,address,date_check_in,date_check_out,room_no,has_paid,food_service}=req.body
 
@@ -46,7 +76,7 @@ route.post("/add",(req,res)=>{
                 if(results1[0].status==="available"){
                     db.query(query,[data],(err2,results2)=>{
                         if(err2){
-                            console.log(err2)
+
                             res.status(400).send({message:"something went wrong"})
                         }
                         else{
@@ -69,72 +99,94 @@ route.post("/add",(req,res)=>{
 
 })
 
-route.post("/book",async (req,res)=>{
+route.post("/book",(req,res)=>{
 
-    let {token,amount}=req.body
-
-
-    let khaltiResponse=null
-
-    try{
-        khaltiResponse=await khalti_token_verifier(token,amount)
-    }
-    catch(err){
-        res.status(406).send({message:"transaction token is invalid!"})
-        return 
-    }
+    let {token,room_type_id}=req.body
+    let {name,phone_no,email,address,date_check_in,date_check_out,has_paid,food_service}=req.body
 
 
-    let {name,phone_no,email,address,date_check_in,date_check_out,room_no,has_paid,food_service}=req.body
+    let room_find_query=`SELECT r.room_no ,r.status ,r.room_type_id,rt.id,rt.name as room_type_name,rt.price_per_night as price FROM room_types as rt
+               INNER JOIN rooms as r ON r.room_type_id=rt.id
+               WHERE rt.id=? AND r.status="available"
+               `
 
-    let timestamp=new Date
-
-
-    let data=[[name,phone_no,email,address,timestamp,date_check_in,date_check_out,room_no,"yet to arrive",1,food_service]]
-
-    let q1=`SELECT status FROM rooms WHERE room_no=?`
-
-    let query=`INSERT INTO booking (name,phone_no,email,address,timestamp,date_check_in,date_check_out,room_no,status,has_paid,food_service)
-               VALUES ?;`
-    let q2=`UPDATE rooms SET status="booked" WHERE room_no=?`
-
-    db.query(q1,[room_no],(err1,results1)=>{
-        if(err1){
-            res.status(400).send({message:"Something went wrong"})
+    db.query(room_find_query,[room_type_id],(err,results)=>{
+        if(err){
+                res.status(400).send({message:"cannot find room"})
+                return
         }
         else{
-            if(results1.length===0){
-                res.status(400).send({message:"No record found with this room no"})
+            if(results.length===0){
+                res.status(400).send({message:"cannot find room"})
+                return
             }
             else{
+                let selected_room=results[0]
 
-                if(results1[0].status==="available"){
-                    db.query(query,[data],(err2,results2)=>{
-                        if(err2){
-                            console.log(err2)
-                            res.status(400).send({message:"something went wrong"})
+    
+
+                khalti_token_verifier(token,selected_room.price*100).then((results)=>{
+
+                    let timestamp=moment(new Date).utc().format("YYYY-MM-DD HH:mm:ss")
+
+                    let data=[[name,phone_no,email,address,timestamp,date_check_in,date_check_out,selected_room.room_no,"yet to arrive",1,food_service]]
+                
+                    let q1=`SELECT status FROM rooms WHERE room_no=?`
+                
+                    let query=`INSERT INTO booking (name,phone_no,email,address,timestamp,date_check_in,date_check_out,room_no,status,has_paid,food_service) VALUES ?`
+
+                    let q2=`UPDATE rooms SET status="booked" WHERE room_no=?`
+                
+                    db.query(q1,[selected_room.room_no],(err1,results1)=>{
+                        if(err1){
+                            res.status(400).send({message:"Something went wrong"})
                         }
                         else{
-                            db.query(q2,[room_no],(err3,results3)=>{
-                                if(err3){
-                                    res.status(400).send({message:"something went wrong"})
+                            if(results1.length===0){
+                                res.status(400).send({message:"No record found with this room no"})
+                            }
+                            else{
+                
+                                if(results1[0].status==="available"){
+                                    db.query(query,[data],(err2,results2)=>{
+                                        if(err2){
+                                            res.status(400).send({message:"something went wrong"})
+                                        }
+                                        else{
+                                            db.query(q2,[selected_room.room_no],(err3,results3)=>{
+                                                if(err3){
+                                                    res.status(400).send({message:"something went wrong"})
+                                                }
+                                                else{
+                                                    res.status(200).send(results2)
+                                                }
+                                            })
+                                        }
+                                    })
                                 }
-                                else{
-                                    res.status(200).send({message:"Room booked sucessfully!"})
-                                }
-                            })
+                                
+                            }
+                
                         }
                     })
-                }
-                
-            }
 
+                }).catch((err)=>{
+                    console.log(err)
+                    res.status(406).send({message:"transaction token is invalid!"})
+                    return
+                })
+
+                    
+
+
+                
+
+            }
         }
     })
-
 })
 
-route.post("/update",(req,res)=>{
+route.post("/update",authTokenVerify,(req,res)=>{
 
     let {id,name,phone_no,email,address,date_check_in,date_check_out,status,room_no,has_paid,food_service}=req.body
 

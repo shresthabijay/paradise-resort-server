@@ -1,5 +1,6 @@
 const express=require("express")
 const route=express.Router()
+const authTokenVerify=require("../middleware/authTokenVerify")
 
 
 route.get("/get/roomdata",(req,res)=>{
@@ -10,7 +11,6 @@ route.get("/get/roomdata",(req,res)=>{
 
     db.query(query,(err,results)=>{
         if(err){
-            console.log(err)
             res.status(400).send({errno:err.errno,code:err.code})
         }
         else{
@@ -53,7 +53,7 @@ route.post("/search/roomtypeid",(req,res)=>{
     })
 })
 
-route.post("/add/room",(req,res)=>{
+route.post("/add/room",authTokenVerify,(req,res)=>{
     let {room_no,room_type_id,status}=req.body
 
     let data=[[room_no,room_type_id,status || "available"]]
@@ -85,6 +85,7 @@ route.get("/getRoomCategories",(req,res)=>{
 })
 
 route.post("/getRoomTypesByCategory",(req,res)=>{
+    console.log(req.body.room_category_name)
     let query=`SELECT * FROM room_types WHERE room_category_name=?;`
 
     db.query(query,[req.body.room_category_name],(err,results)=>{
@@ -92,13 +93,13 @@ route.post("/getRoomTypesByCategory",(req,res)=>{
             res.status(400).send({errno:err.errno,code:err.code})
         }
         else{
-            console.log(results)
+            console.log(req.body.room_category_name,results)
             res.status(200).send(results)
         }
     })
 })
 
-route.post("/add/roomtype",(req,res)=>{
+route.post("/add/roomtype",authTokenVerify,(req,res)=>{
     let {name,description,price_per_night,quantity,room_category_name}=req.body
 
     let data=[[name,description,price_per_night,quantity,room_category_name]]
@@ -117,7 +118,7 @@ route.post("/add/roomtype",(req,res)=>{
     })
 })
 
-route.post("/update/room",(req,res)=>{
+route.post("/update/room",authTokenVerify,(req,res)=>{
 
     let {name,description,price_per_night,quantity,room_category_name,room_no}=req.body
 

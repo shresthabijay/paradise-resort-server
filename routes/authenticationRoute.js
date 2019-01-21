@@ -32,7 +32,7 @@ router.post("/login",(req,res)=>{
             if(bcrypt.compareSync(password,hashPassword)){
                 let secret=config.jwt.secretkey
                 var token = jwt.sign({ id: results[0].id },secret, {
-                    expiresIn: 86400 // expires in 24 hours
+                    expiresIn: 8444444400 // expires in 24 hours
                 });
                            
                 res.status(200).send({token:token})
