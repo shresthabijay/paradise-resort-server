@@ -2,8 +2,6 @@ const http=require("http")
 db=require("./database.js")
 const app=require("./app")
 const BookingsEventsNotify=require("./bookingEventsNotify")
-
-
 const port=7000
 
 let server=http.createServer(app)
