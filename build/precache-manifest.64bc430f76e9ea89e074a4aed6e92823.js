@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/static/media/grid-food5.30fbdfbb.jpeg"
   },
   {
-    "revision": "85c13ec0731edd88fb99",
+    "revision": "f4ae12caf2f92c3a5d9b",
     "url": "/static/css/main.c2e14135.chunk.css"
   },
   {
@@ -100,8 +100,8 @@ self.__precacheManifest = [
     "url": "/static/media/grid-food4.33d38f72.jpeg"
   },
   {
-    "revision": "85c13ec0731edd88fb99",
-    "url": "/static/js/main.85c13ec0.chunk.js"
+    "revision": "f4ae12caf2f92c3a5d9b",
+    "url": "/static/js/main.f4ae12ca.chunk.js"
   },
   {
     "revision": "1fc8bff9b2417aeb6d58942d8e4c3fcf",
@@ -200,7 +200,7 @@ self.__precacheManifest = [
     "url": "/static/css/1.8e598fae.chunk.css"
   },
   {
-    "revision": "55fa053fed5cc0064c2aa6bfd97d6f59",
+    "revision": "1e064596d7d455a1cc36fa7cc9f90175",
     "url": "/index.html"
   }
 ];

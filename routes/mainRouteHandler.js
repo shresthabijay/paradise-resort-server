@@ -9,7 +9,7 @@ const app=express.Router()
 
 app.use("/rooms",roomsRoute)
 app.use("/bookings",bookingRoute)
-app.use("/events",authTokenVerify,eventsRoute)
+app.use("/eventapi",authTokenVerify,eventsRoute)
 app.use("/authenticate",authenticationRoute)
 
 module.exports=app
