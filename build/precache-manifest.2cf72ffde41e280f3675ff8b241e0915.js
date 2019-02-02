@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "30fbdfbb0dbcc62799a45729548d28b4",
-    "url": "/static/media/grid-food5.30fbdfbb.jpeg"
+    "revision": "9579861e7bd288e8b595889ec7e7e8cd",
+    "url": "/static/media/grid-room5.9579861e.jpeg"
   },
   {
-    "revision": "f4ae12caf2f92c3a5d9b",
-    "url": "/static/css/main.c2e14135.chunk.css"
+    "revision": "681b02da2e8563f14f16",
+    "url": "/static/css/main.0acf65a4.chunk.css"
   },
   {
-    "revision": "a6b71ef7ebac8b9e6eeebca360ad537f",
-    "url": "/static/media/book_room-suite.a6b71ef7.jpg"
+    "revision": "f08a4e531fb22aeae51eedf4e30e1174",
+    "url": "/static/media/signbg.f08a4e53.jpg"
   },
   {
-    "revision": "9cddfceb3dd78da253d0",
-    "url": "/static/js/1.9cddfceb.chunk.js"
+    "revision": "3a68aea4448689b0624c",
+    "url": "/static/js/1.3a68aea4.chunk.js"
   },
   {
     "revision": "229c360febb4351a89df",
@@ -100,8 +100,8 @@ self.__precacheManifest = [
     "url": "/static/media/grid-food4.33d38f72.jpeg"
   },
   {
-    "revision": "f4ae12caf2f92c3a5d9b",
-    "url": "/static/js/main.f4ae12ca.chunk.js"
+    "revision": "30fbdfbb0dbcc62799a45729548d28b4",
+    "url": "/static/media/grid-food5.30fbdfbb.jpeg"
   },
   {
     "revision": "1fc8bff9b2417aeb6d58942d8e4c3fcf",
@@ -128,8 +128,8 @@ self.__precacheManifest = [
     "url": "/static/media/grid-room4.0f4fffde.jpeg"
   },
   {
-    "revision": "9579861e7bd288e8b595889ec7e7e8cd",
-    "url": "/static/media/grid-room5.9579861e.jpeg"
+    "revision": "681b02da2e8563f14f16",
+    "url": "/static/js/main.681b02da.chunk.js"
   },
   {
     "revision": "4b9b84ab053436fa61e4a675226554e1",
@@ -196,11 +196,67 @@ self.__precacheManifest = [
     "url": "/static/media/book_room-double.a9700dbf.jpg"
   },
   {
-    "revision": "9cddfceb3dd78da253d0",
-    "url": "/static/css/1.8e598fae.chunk.css"
+    "revision": "a6b71ef7ebac8b9e6eeebca360ad537f",
+    "url": "/static/media/book_room-suite.a6b71ef7.jpg"
   },
   {
-    "revision": "1e064596d7d455a1cc36fa7cc9f90175",
+    "revision": "1c7da144342577e44ba9e3266f81cd17",
+    "url": "/static/media/butta.1c7da144.png"
+  },
+  {
+    "revision": "d31372b0086b38d6edc3125ee30cd472",
+    "url": "/static/media/bg1.d31372b0.jpg"
+  },
+  {
+    "revision": "ba01244bc939d7fef9263d27cac929d4",
+    "url": "/static/media/bg3.ba01244b.jpg"
+  },
+  {
+    "revision": "88a005f26227271b0c8a19323181d99a",
+    "url": "/static/media/bg2.88a005f2.jpg"
+  },
+  {
+    "revision": "1978b5a3a375dcfd3b6c99ab6fa9b0cd",
+    "url": "/static/media/ssr1.1978b5a3.jpg"
+  },
+  {
+    "revision": "7f592c82c3eb6c6b1c8245ddb8d265d8",
+    "url": "/static/media/ssr2.7f592c82.jpg"
+  },
+  {
+    "revision": "39cd49bd630ee4d28978b9029afc7b16",
+    "url": "/static/media/ssr3.39cd49bd.jpg"
+  },
+  {
+    "revision": "1384dad421189487f9c1505db4a66dc1",
+    "url": "/static/media/sushi.1384dad4.jpg"
+  },
+  {
+    "revision": "4d4e3e8ac2c5f3ab6799728f30238492",
+    "url": "/static/media/momo.4d4e3e8a.jpg"
+  },
+  {
+    "revision": "db0afedab46213ee4297c223ca3b35aa",
+    "url": "/static/media/chefs.db0afeda.jpg"
+  },
+  {
+    "revision": "c7879a3fa6f12e49349a9bdc10911225",
+    "url": "/static/media/BAUHS93.c7879a3f.woff"
+  },
+  {
+    "revision": "89d11a443c316da80dcb8f5e1f63c86e",
+    "url": "/static/media/BAUHS93.89d11a44.ttf"
+  },
+  {
+    "revision": "be9d286ed1065157f48e03aa1c2b11be",
+    "url": "/static/media/BAUHS93.be9d286e.eot"
+  },
+  {
+    "revision": "3a68aea4448689b0624c",
+    "url": "/static/css/1.10e05c67.chunk.css"
+  },
+  {
+    "revision": "bf917b307199d0224093f7e5474bb299",
     "url": "/index.html"
   }
 ];
