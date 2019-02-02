@@ -121,6 +121,11 @@ route.post("/book",(req,res)=>{
                 return
             }
             else{
+
+                let rt_name=results[0].room_type_name
+                let r_no=results[0].room_no
+                let r_price=results[0].price
+
                 let selected_room=results[0]
 
     
@@ -158,7 +163,8 @@ route.post("/book",(req,res)=>{
                                                     res.status(400).send({message:"something went wrong"})
                                                 }
                                                 else{
-                                                    res.status(200).send(results2)
+                                                    console.log({bookingId:results2.insertId,room_type_name:rt_name,price:r_price,room_no:r_no})
+                                                    res.status(200).send({bookingId:results2.insertId,room_type_name:rt_name,price:r_price,room_no:r_no})
                                                 }
                                             })
                                         }

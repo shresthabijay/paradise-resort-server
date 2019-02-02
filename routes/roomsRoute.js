@@ -85,7 +85,6 @@ route.get("/getRoomCategories",(req,res)=>{
 })
 
 route.post("/getRoomTypesByCategory",(req,res)=>{
-    console.log(req.body.room_category_name)
     let query=`SELECT * FROM room_types WHERE room_category_name=?;`
 
     db.query(query,[req.body.room_category_name],(err,results)=>{
@@ -93,7 +92,6 @@ route.post("/getRoomTypesByCategory",(req,res)=>{
             res.status(400).send({errno:err.errno,code:err.code})
         }
         else{
-            console.log(req.body.room_category_name,results)
             res.status(200).send(results)
         }
     })
